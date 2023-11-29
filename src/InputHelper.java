@@ -3,8 +3,7 @@ public class InputHelper {
     public static void main(String[] args) {
     //Test Method
         Scanner scan = new Scanner(System.in);
-        String dob = getRegExString(scan, "Enter Your shit man", "\\d{2}.\\d{2}.\\d{4}");
-        System.out.println("Your SSN: " + dob);
+        boolean done = getYNConfirm(scan, "Please enter YN");
     }
 
     //This method loops until a valid integer input is received. Returns int value.
@@ -24,8 +23,6 @@ public class InputHelper {
         } while (!done);
         return x;
     }
-
-
 
     public static int getRangedInt(Scanner in, String prompt, int min, int max){
         boolean done = false;
@@ -126,33 +123,41 @@ public static double getDouble(Scanner in, String prompt){
         } while (!done);
         return input;
     }
-    public static String getYNConfirm(Scanner in, String prompt){
+    public static boolean getYNConfirm(Scanner in, String prompt){
         boolean done = false;
-        String input;
+        String YN;
         do {
             System.out.println(prompt);
-
+            YN = in.nextLine();
+            YN = YN.toUpperCase();
+            if (YN.equals("N") || YN.equals("Y")) {
+                done = true;
+            }
+            else {
+                System.out.println("You have entered an invalid input");
+            }
+        } while (!done);
+        if (YN.equals("N")) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+    public static String getNonZeroLenString (Scanner in, String prompt){
+        boolean done = false;
+        String input;
+        System.out.println(prompt);
+        do {
+            input = in.nextLine();
+            if (input.length() > 0 && in.hasNextLine()) {
+                done = true;
+            }
+            else {
+                System.out.println("You have entered an invalid String");
+            }
         } while (!done);
         return input;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
 
